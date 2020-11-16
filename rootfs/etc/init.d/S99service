@@ -1,0 +1,26 @@
+#! /bin/sh
+
+check3881Flag=`/usr/sbin/fw_printenv check3881 | awk -F "=" '{print $2}'`
+if [ $check3881Flag -eq 1 ] 
+then
+    mount -t jffs2     /dev/mtdblock7 /onvif  -o sync
+    cd /app
+    ./initrun.sh
+else
+    #Setting parts mounting 
+    mount -t jffs2     /dev/mtdblock4 /web    -o sync
+    mount -t squashfs  /dev/mtdblock5 /custom
+    mount -t jffs2     /dev/mtdblock6 /config -o sync
+    mount -t jffs2     /dev/mtdblock7 /onvif  -o sync
+
+    ln -s /web/http/* /home/http/
+    ln -s /app/root/edvr/audio/ /home/audio
+
+    #exec app
+    cd /app
+    ./initrun.sh
+
+    #exec config you want
+    cd /config
+    ./mount.sh
+fi

@@ -1,0 +1,16 @@
+#!/bin/sh
+#echo "*Welcome to Into Zview Series Interface*";
+check3881Flag=`fw_printenv check3881 | awk -F "=" '{print $2}'`
+if [ $check3881Flag -eq 1 ] 
+then
+	/bin/sh
+else
+	DebugMode=`fw_printenv -n ptzsupport`;
+	if [ "$DebugMode" -eq 0 ];then
+		#echo "*Into Debug Mode*";
+		/bin/login;
+		#/sbin/getty -L ttyS000 115200 vt100 -n root -I "Auto login as root ..."
+	else
+		echo "*Into PTZ Mode*";
+	fi
+fi

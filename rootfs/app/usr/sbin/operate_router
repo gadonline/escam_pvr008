@@ -1,0 +1,136 @@
+#!/bin/sh
+
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 < addRoute | delRoute > | <monitorRoute> | > < eth0 | wlan0 >";
+    exit;
+fi
+
+if [ "addRoute" != "$1" -a "delRoute" != "$1" -a "monitorRoute" != "$1" ]; then
+    echo "Usage: $0 < addRoute | delRoute > | <monitorRoute> | > < eth0 | wlan0 >";
+    exit;
+fi
+
+if [ "eth0" != "$2" -a "wlan0" != "$2" ]; then
+    echo "Usage: $0 < addRoute | delRoute > | <monitorRoute> | > < eth0 | wlan0 >";
+    exit;
+fi
+
+# 检查IP地址是否合法
+TmpIpAddr="192.168.1.11";
+CheckIPAddr()
+{
+    echo $TmpIpAddr | grep "^[0-9]\{1,3\}\.\([0-9]\{1,3\}\.\)\{2\}[0-9]\{1,3\}$" >/dev/null;
+    #IP地址必须为全数字
+    if [ $? -ne 0 ]
+    then
+        echo "Note: $TmpIpAddr is invail!";
+        return 1;
+    fi
+
+    tmpipaddr=$TmpIpAddr;
+    a=`echo $tmpipaddr | awk -F . '{print $1}'`; #以"."分隔，取出每个列的值
+    b=`echo $tmpipaddr | awk -F . '{print $2}'`;
+    c=`echo $tmpipaddr | awk -F . '{print $3}'`;
+    d=`echo $tmpipaddr | awk -F . '{print $4}'`;
+    for num in $a $b $c $d
+    do
+        if [ $num -gt 255 ] || [ $num -lt 0 ]; #每个数值必须在0-255之间
+        then
+            echo "Note: $TmpIpAddr is invail!";
+            return 1;
+        fi
+    done
+    #   echo "$TmpIpAddr is Ok";
+    return 0;
+}
+
+NETDEV=$2;
+
+addRoute()
+{
+    # 添加路由(new_ip = ip & mask)
+    ipaddr=`ifconfig $NETDEV | grep "inet addr:" | awk '{printf $2}' | awk -F ":" '{printf $2}'`;
+    TmpIpAddr=$ipaddr; CheckIPAddr; if [ $? -ne 0 ]; then ipaddr="192.168.1.11"; fi
+
+    mask=`ifconfig $NETDEV | grep "Mask:"| awk -F ":" '{printf $4}'`;
+    TmpIpAddr=$mask; CheckIPAddr; if [ $? -ne 0 ]; then mask="255.255.255.0"; fi
+
+    new_ip=`/usr/sbin/calc_ip $ipaddr $mask`;
+    TmpIpAddr=$new_ip; CheckIPAddr; if [ $? -ne 0 ]; then new_ip="192.168.1.1"; fi
+
+    if [ -n "$new_ip" -a -n "$mask" ]; then
+        route add -net $new_ip netmask $mask dev $NETDEV;
+        echo "route add -net $new_ip netmask $mask dev $NETDEV Over!";
+    fi
+
+    # 添加默认网关
+    # 1. 检查当前网卡DHCP是否使能
+    IsDhcpEnable=0;
+    if [ "$NETDEV"x = "wlan0"x ]; then
+        gw_file="/tmp/.wlan.gw.gw.gw";
+    else
+        gw_file="/tmp/.tmp.gw.gw.gw";
+    fi
+
+    # 2. 根据是否使能DHCP，配置不同的路由
+    if [ -f "$gw_file" ]; then
+        gateway=`cat $gw_file`;
+    else
+        gateway=`cat /etc/network/interfaces | grep $NETDEV -A 5 | grep gateway | awk '{print $2}'`
+    fi
+    TmpIpAddr=$gateway; CheckIPAddr; if [ $? -ne 0 ]; then gateway="192.168.1.1"; fi
+
+    if [ -n "$gateway" ]; then
+        route add $gateway dev $NETDEV;
+        route add default gw $gateway dev $NETDEV;
+        echo "route add default gw $gateway dev $NETDEV Over!";
+        route del $gateway dev $NETDEV;
+    fi
+}
+
+delRoute()
+{
+    i=1;
+    CNT=`route -n | grep $NETDEV -c`;
+    #   echo $2 has $CNT routers need delete!;
+
+    while [ $i -le $CNT ]
+    do
+        GIP=`route -n | grep $NETDEV -m 1 | awk -F " " '{print $1}'`;
+        GNM=`route -n | grep $NETDEV -m 1 | awk -F " " '{print $3}'`;
+        route del -net $GIP netmask $GNM dev $NETDEV;
+        echo "route del -net $GIP netmask $GNM dev $NETDEV Over!";
+        i=`expr $i + 1`;
+    done
+}
+
+CleanUpArpTable=`arp -n|awk '/^[1-9]/{print "arp -d  " $1}'`;
+
+RebootNetInterface=0;
+check_net_block()
+{
+    while true
+    do
+        if [ $RebootNetInterface -eq 1 ]; then
+            ifconfig $NETDEV down;
+            ifconfig $NETDEV up;
+            addRoute;
+            RebootNetInterface=0;
+        fi
+        sleep 1;
+    done
+}
+
+if [ "addRoute" == "$1" ]; then
+    echo Begin Setting $NETDEV Router ...;
+    addRoute;
+    echo "Setting $NETDEV Router over!";
+elif [ "delRoute" == "$1" ]; then
+    echo Begin delete $NETDEV Router ...;
+    delRoute;
+    echo "Delete $NETDEV Router over!";
+else
+    echo Begin delete $NETDEV Router ...;
+    delRoute;
+    echo "Delete $NETDEV Router over!";
+fi

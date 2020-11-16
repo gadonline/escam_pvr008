@@ -1,0 +1,8 @@
+pool.ntp.org
+ntp1.inrim.it
+time.nuri.net
+time.windows.com
+time.nist.gov
+time-nw.nist.gov
+time.kriss.re.kr
+time.apple.com

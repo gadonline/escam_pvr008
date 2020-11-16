@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Device>
+    <StreamList>
+        <StreamConfig>
+            <StreamID>0</StreamID>
+            <VideoCodecType>
+                <Type>H264</Type>
+                <Type>H265</Type>
+            </VideoCodecType>
+            <ResolutionType>
+				<Type>2304X1296</Type>
+				<Type>1920X1080</Type>
+            </ResolutionType>
+            <BitrateType>
+                <Type>CBR</Type>
+                <Type>VBR</Type>
+            </BitrateType>
+            <StreamType>
+            	<Type>Video</Type>
+            	<Type>VideoAudio</Type>
+            </StreamType>
+            <PicType>
+            </PicType>
+            <MaxFrameRate>25</MaxFrameRate>
+            <MaxBitrate>8192</MaxBitrate>
+        </StreamConfig>
+        
+        <StreamConfig>
+            <StreamID>1</StreamID>
+            <VideoCodecType>
+                <Type>H264</Type>
+                <Type>H265</Type>
+            </VideoCodecType>
+            <ResolutionType>
+				<Type>800X448</Type>
+                <Type>704X576</Type>
+                <Type>640X360</Type>
+                <Type>352X288</Type>
+            </ResolutionType>
+            <BitrateType>
+                <Type>CBR</Type>
+                <Type>VBR</Type>
+            </BitrateType>
+            <StreamType>
+            	<Type>Video</Type>
+            	<Type>VideoAudio</Type>
+            </StreamType>
+            <MaxFrameRate>25</MaxFrameRate>
+            <MaxBitrate>1024</MaxBitrate>
+        </StreamConfig>
+
+        <StreamConfig>
+            <StreamID>3</StreamID>
+            <VideoCodecType>
+                <Type>MJPEG</Type>
+            </VideoCodecType>
+            <ResolutionType>
+                <Type>352X288</Type>
+            </ResolutionType>
+            <BitrateType>
+                <Type>CBR</Type>
+            </BitrateType>
+            <StreamType>
+				<Type>Video</Type>
+			</StreamType>
+            <MaxFrameRate>25</MaxFrameRate>
+            <MaxBitrate>1024</MaxBitrate>
+        </StreamConfig>
+        
+    </StreamList>
+ </Device>   
+    
+    

@@ -1,0 +1,21 @@
+application/x-gtar              gtar
+application/x-gzip              gz
+application/x-httpd-php3        php3
+application/x-tar               tar
+application/x-rtsp-tunnelled    sdp
+application/zip                 zip
+audio/basic                     au snd
+audio/mpeg                      mpga mp2
+image/gif                       gif
+image/ief                       ief
+image/jpeg                      jpeg jpg jpe
+image/png                       png
+image/tiff                      tiff tif
+text/html                       html htm
+text/plain                      txt
+text/vnd.wap.wml                wml
+text/vnd.wap.wmlscript          wmls
+text/xml                        xml xsl
+video/mpeg                      mpeg mpg mpe
+text/css                        css
+multipart/x-mixed-replace;boundary=myboundary      mjpg

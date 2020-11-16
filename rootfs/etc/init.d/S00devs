@@ -1,0 +1,72 @@
+#!/bin/sh
+
+mknod /dev/console c 5 1
+mknod /dev/ttyAMA0 c 204 64
+mknod /dev/ttyAMA1 c 204 65
+mknod /dev/ttyS000 c 204 64
+mknod /dev/null	   c 1 3
+
+# mkdir tmp var dir and mount it
+mount -t tmpfs tmpfs /var
+mount -t tmpfs tmpfs /tmp
+mkdir /tmp/lib
+mkdir /var/log
+mkdir /var/lock
+mkdir /var/run
+
+#3881产测模式(不启动主程序，等待产测工具发送命令)
+check3881Flag=`/usr/sbin/fw_printenv check3881 | awk -F "=" '{print $2}'`
+#echo "111 check3881Flag=$check3881Flag"
+if [ $check3881Flag -eq 1 ] 
+then
+    mount -t jffs2     /dev/mtdblock7 /onvif  -o sync
+    ulimit -s 2048
+    
+    #8188高电平使能
+    #8189低电平使能
+    #reset wifi dev
+    himm 0x112C0050 0x0000
+    himm 0x120B8400 0x40
+    if [ -e "/onvif/wifi/hi3881.ko" ]
+    then
+        himm 0x120B8100 0x00
+        usleep 10000
+        himm 0x120B8100 0x40
+    else
+        himm 0x120B8100 0x40
+        usleep 10000
+        himm 0x120B8100 0x00
+    fi
+    
+    insmod /onvif/wifi/cfg80211.ko
+    if [ -e "/onvif/wifi/hi3881.ko" ]
+    then
+        cp -vr /onvif/wifi/hisilicon/wifi_cfg_ce /tmp/wifi_cfg
+        insmod /onvif/wifi/hi3881.ko g_fw_mode=1 
+        
+        touch /tmp/.check3881flag
+        exit 0
+    fi
+fi
+
+# make /etc dirent readwrite
+mkdir /var/etc
+cp -rv /etc/* /var/etc
+mount /var/etc /etc
+
+# make /usr dirent readwrite
+mkdir /tmp/usr
+cp -rv /usr/* /tmp/usr
+mount /tmp/usr /usr
+
+# make /root dirent readwrite
+mkdir /tmp/root
+mount /tmp/root /root
+
+# make /dat dirent readwrite
+mkdir /tmp/dat
+mount /tmp/dat /dat
+
+mkdir /tmp/home
+mount /tmp/home /home
+mkdir /home/http

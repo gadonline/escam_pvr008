@@ -1,0 +1,14 @@
+noip,dynupdate.no-ip.com
+qdns,members.3322.org
+qdns-static, members.3322.org(static)
+dyndns, members.dyndns.org
+dyndns-static,members.dyndns.org(static)
+tzo,cgi.tzo.com
+easydns,members.easydns.com
+justlinux,www.justlinux.com
+ods,update.ods.org
+zoneedit,www.zoneedit.com
+hn,www.hn.org
+dhs,members.dhs.org
+dyns,www.dyns.cx
+vantech,www.vantechdns.net
