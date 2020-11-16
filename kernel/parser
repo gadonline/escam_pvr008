@@ -1,0 +1,10 @@
+#!/bin/bash -e
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+grep "=" .config | while read line
+do
+    if ! grep -q $line /home/user/all/git/chaos_calmer/build_dir/target-arm_cortex-a7_uClibc-0.9.33.2_eabi/linux-hi35xx_16ev300/linux-4.9.37/.config
+    then
+            echo $line
+    fi
+done

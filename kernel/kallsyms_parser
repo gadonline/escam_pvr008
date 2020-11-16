@@ -1,0 +1,12 @@
+#!/bin/bash -e
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+cat kallsyms | while read line
+do
+    if ! grep -r ${line} 2> /dev/null | grep -q "Двоичный файл"
+    then
+        echo $line 
+    fi
+done
+
+
