@@ -1,0 +1,12 @@
+Package: zoneinfo-asia
+Version: 2020a-1
+Depends: libc, libssp, librt, libpthread
+Source: feeds/packages/utils/zoneinfo
+SourceName: zoneinfo-asia
+License: Public Domain
+Section: utils
+SourceDateEpoch: 1599139428
+Maintainer: Vladimir Ulrich <admin@evl.su>
+Architecture: armv7-3.2
+Installed-Size: 30980
+Description:  Zone Information (Asia)

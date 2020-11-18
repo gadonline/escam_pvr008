@@ -1,0 +1,147 @@
+Package: terminfo
+Version: 6.2-1
+Depends: libc, libssp, librt, libpthread
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739873
+Auto-Installed: yes
+
+Package: libc
+Version: 2.27-10
+Depends: libgcc
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739865
+Auto-Installed: yes
+
+Package: locales
+Version: 2.27-9
+Depends: libc, libssp, librt, libpthread, grep
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739878
+Auto-Installed: yes
+
+Package: entware-upgrade
+Version: 1.0-1
+Depends: libc, libssp, librt, libpthread
+Status: install ok installed
+Architecture: all
+Installed-Time: 1605739879
+Auto-Installed: yes
+
+Package: opkg
+Version: 2020-05-07-f2166a89-1
+Depends: libc, libssp, librt, libpthread, libpthread
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739879
+Auto-Installed: yes
+
+Package: libpthread
+Version: 2.27-10
+Depends: libgcc
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739865
+Auto-Installed: yes
+
+Package: zoneinfo-europe
+Version: 2020a-1
+Depends: libc, libssp, librt, libpthread
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739872
+Auto-Installed: yes
+
+Package: busybox
+Version: 1.31.1-4
+Depends: libc, libssp, librt, libpthread
+Conflicts: busybox-selinux
+Status: install user installed
+Essential: yes
+Architecture: armv7-3.2
+Installed-Time: 1605739866
+
+Package: libpcre
+Version: 8.44-2
+Depends: libc, libssp, librt, libpthread
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739875
+Auto-Installed: yes
+
+Package: grep
+Version: 3.4-2
+Depends: libc, libssp, librt, libpthread, libpcre
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739875
+Auto-Installed: yes
+
+Package: zoneinfo-asia
+Version: 2020a-1
+Depends: libc, libssp, librt, libpthread
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739872
+Auto-Installed: yes
+
+Package: libstdcpp
+Version: 8.4.0-10
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739871
+Auto-Installed: yes
+
+Package: libgcc
+Version: 8.4.0-10
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739861
+Auto-Installed: yes
+
+Package: librt
+Version: 2.27-10
+Depends: libpthread
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739866
+Auto-Installed: yes
+
+Package: entware-release
+Version: 1.0-2
+Depends: libc, libssp, librt, libpthread
+Status: install ok installed
+Architecture: all
+Installed-Time: 1605739871
+Auto-Installed: yes
+
+Package: findutils
+Version: 4.7.0-2
+Depends: libc, libssp, librt, libpthread
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739873
+Auto-Installed: yes
+
+Package: libssp
+Version: 8.4.0-10
+Status: install ok installed
+Architecture: armv7-3.2
+Installed-Time: 1605739865
+Auto-Installed: yes
+
+Package: entware-opt
+Version: 227000-3
+Depends: libc, libssp, librt, libpthread, libgcc, libstdcpp, libpthread, librt, entware-release, zoneinfo-asia, zoneinfo-europe, findutils, terminfo, locales, opkg, entware-upgrade
+Conflicts: opt-ndmsv2
+Status: install user installed
+Architecture: all
+Conffiles:
+ /opt/etc/profile f3273b58a3f62d1a4216c2fab30c36f17b16fc97324119a62cf2ba68f3c75ffb
+ /opt/etc/passwd.1 e26f51b6cf450fed85cf6179e323e894ea413ccf913c8c9d3a230fd520e4ab19
+ /opt/etc/group.1 d0e5f0d86ff4c7027efd7bf0196c95a73e6b4407d6870ed36f969ff75d633d88
+ /opt/etc/shells.1 126b0362dce578a66ffe803a04e15dec74a854dd0786dcb004b5789fdde8781d
+Installed-Time: 1605739879
+

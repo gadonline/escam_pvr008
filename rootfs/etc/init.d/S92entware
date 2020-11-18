@@ -1,0 +1,9 @@
+#! /bin/sh
+
+if mount -t ext2 /dev/mmcblk0p4 /opt
+then
+    if [-f /opt/etc/init.d/rc.unslung ]
+    then
+            /opt/etc/init.d/rc.unslung start
+    fi
+fi

@@ -1,0 +1,12 @@
+Package: librt
+Version: 2.27-10
+Depends: libpthread
+Source: package/libs/toolchain
+SourceName: librt
+License: GPL-3.0-with-GCC-exception
+Section: libs
+SourceDateEpoch: 1599139428
+Maintainer: Felix Fietkau <nbd@nbd.name>
+Architecture: armv7-3.2
+Installed-Size: 11480
+Description:  POSIX.1b RealTime extension library

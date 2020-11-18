@@ -1,0 +1,12 @@
+Package: libpthread
+Version: 2.27-10
+Depends: libgcc
+Source: package/libs/toolchain
+SourceName: libpthread
+License: GPL-3.0-with-GCC-exception
+Section: libs
+SourceDateEpoch: 1599139428
+Maintainer: Felix Fietkau <nbd@nbd.name>
+Architecture: armv7-3.2
+Installed-Size: 39689
+Description:  POSIX thread library

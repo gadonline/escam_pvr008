@@ -1,0 +1,11 @@
+Package: libgcc
+Version: 8.4.0-10
+Source: package/libs/toolchain
+SourceName: libgcc
+License: GPL-3.0-with-GCC-exception
+Section: libs
+SourceDateEpoch: 1599139428
+Maintainer: Felix Fietkau <nbd@nbd.name>
+Architecture: armv7-3.2
+Installed-Size: 21776
+Description:  GCC support library

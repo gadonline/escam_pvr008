@@ -1,0 +1,14 @@
+#!/opt/bin/busybox sh
+
+bb_fc=`/opt/bin/busybox readlink -f /opt/bin/busybox`
+for file in /opt/bin/*; do
+    if [ -L $file  -a "`/opt/bin/busybox readlink -f $file`" = $bb_fc ]; then
+       /opt/bin/busybox rm -f $file
+    fi
+done
+
+for file in /opt/sbin/*; do
+    if [ -L $file  -a "`/opt/bin/busybox readlink -f $file`" = $bb_fc ]; then
+       /opt/bin/busybox rm -f $file
+    fi
+done
