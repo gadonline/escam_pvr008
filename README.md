@@ -49,6 +49,17 @@ ROOTFS_PART=/dev/sdb3
 sudo dd if=rootfs.squashfs of=$ROOTFS_PART
 ```
 
+Установка entware:
+
+```
+ENTWARE_PART=/dev/sdb4
+TEMP_DIR=$(mktemp -d)
+sudo mount -t ext2 $KERNEL_PART $TEMP_DIR
+sudo cp -r entware/* $TEMP_DIR
+sudo umount $ENTWARE_PART
+rm -r $TEMP_DIR
+```
+
 Настройка U-Boot:
 
 ```
