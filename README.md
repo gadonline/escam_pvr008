@@ -50,7 +50,7 @@ rm -r $TEMP_DIR
 Настройка U-Boot:
 
 ```
-setenv bootargs console=ttyAMA0,115200 root=/dev/mmcblk0p3 rootwait rootfstype=ext2 init=/linuxrc mtdparts=hi_sfc:256K(uboot),64K(env),2304K(kernel),6656K(romfs),2048K(webserver),384K(custom),768K(config),3904K(onvif)
+setenv bootargs console=ttyAMA0,115200 root=/dev/mmcblk0p3 rootwait rootfstype=ext2 rw init=/linuxrc mtdparts=hi_sfc:256K(uboot),64K(env),2304K(kernel),6656K(romfs),2048K(webserver),384K(custom),768K(config),3904K(onvif)
 setenv bootcmd 'setenv bootargs ${bootargs} mem=${osmem};fatload mmc 0:2 0x42000000 uImage;bootm 0x42000000'
 setenv ptzsupport
 saveenv

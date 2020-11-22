@@ -1,7 +1,8 @@
 #! /bin/sh
 
+echo $(fw_printenv -n authorized_keys) > /opt/etc/dropbear/authorized_keys
 
-if [ -f /opt/etc/init.d/rc.unslung ]
-then
-    /opt/etc/init.d/rc.unslung start
-fi
+chmod 700 /opt/root
+chmod 600 /opt/etc/{passwd,dropbear/authorized_keys}
+
+/opt/etc/init.d/rc.unslung start
