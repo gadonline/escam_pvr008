@@ -1,0 +1,13 @@
+Package: dropbear
+Version: 2020.80-2
+Depends: libc, libssp, librt, libpthread
+Source: package/network/services/dropbear
+SourceName: dropbear
+License: MIT
+LicenseFiles: LICENSE libtomcrypt/LICENSE libtommath/LICENSE
+Section: net
+SourceDateEpoch: 1599139428
+CPE-ID: cpe:/a:matt_johnston:dropbear_ssh_server
+Architecture: armv7-3.2
+Installed-Size: 103654
+Description:  A small SSH2 server/client designed for small memory environments.

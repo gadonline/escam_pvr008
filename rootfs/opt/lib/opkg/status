@@ -87,6 +87,15 @@ Architecture: armv7-3.2
 Installed-Time: 1605739872
 Auto-Installed: yes
 
+Package: dropbear
+Version: 2020.80-2
+Depends: libc, libssp, librt, libpthread
+Status: install user installed
+Architecture: armv7-3.2
+Conffiles:
+ /opt/etc/config/dropbear.conf bd0c33c1188a41940ce0fd422992ede0a13b4000ca2c8a4950626ba848f35524
+Installed-Time: 1606169085
+
 Package: libstdcpp
 Version: 8.4.0-10
 Status: install ok installed

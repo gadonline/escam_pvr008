@@ -2,7 +2,23 @@
 
 echo $(fw_printenv -n authorized_keys) > /opt/etc/dropbear/authorized_keys
 
-chmod 700 /opt/root
-chmod 600 /opt/etc/{passwd,dropbear/authorized_keys}
+chmod 700 /opt/root /opt/etc/dropbear
+chmod 600 /opt/etc/passwd /opt/etc/dropbear/authorized_keys
+chown root:root -R /opt/etc/passwd /opt/etc/dropbear
+
+if [ ! -f /opt/etc/dropbear/dropbear_rsa_host_key ]
+then
+    /opt/bin/dropbearkey -t rsa -f /opt/etc/dropbear/dropbear_rsa_host_key
+fi
+
+if [ ! -f /opt/etc/dropbear/dropbear_ecdsa_host_key ]
+then
+    /opt/bin/dropbearkey -t ecdsa -f /opt/etc/dropbear/dropbear_ecdsa_host_key
+fi
+
+if [ ! -f /opt/etc/dropbear/dropbear_ed25519_host_key ]
+then
+    /opt/bin/dropbearkey -t ed25519 -f /opt/etc/dropbear/dropbear_ed25519_host_key
+fi
 
 /opt/etc/init.d/rc.unslung start

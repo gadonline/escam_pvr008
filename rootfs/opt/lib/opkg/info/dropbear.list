@@ -1,0 +1,7 @@
+/opt/sbin/dropbear
+/opt/bin/scp
+/opt/bin/dropbearkey
+/opt/bin/ssh
+/opt/etc/config/dropbear.conf
+/opt/etc/init.d/S51dropbear
+/opt/bin/dbclient
