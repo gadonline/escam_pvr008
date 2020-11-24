@@ -215,63 +215,59 @@ SD_STATUS=`cat /tmp/.sd_status`
 
 #set MAC, wifi
 WifiModFile="/tmp/.wifi.mod.ok"
-ONVIF_PART=`mount | grep onvif`
-if [ ! -n "$ONVIF_PART" ];then
-	/usr/sbin/wifi_detect
-else
-	ln -s /onvif/wifi/wpa_*       /usr/sbin/
-	ln -s /onvif/wifi/iw*         /usr/sbin/
-	ln -s /onvif/ramdisk/*        /usr/sbin/
-	ln -s /onvif/wifi/host*       /usr/sbin/
-	
-	mkdir -p /tmp/picture/pic_for_email
-	mkdir -p /tmp/picture/pic_for_sd
-	mkdir -p /tmp/picture/pic_for_ftp
 
-	insmod /onvif/phy/sr9900.ko
-	ifconfig eth0 up
-	
-	insmod /onvif/wifi/cfg80211.ko
-	#if [ -e "/tmp/.SensorName_F23" ]; then
-	if [ -e "/onvif/wifi/8188fu.ko" -o -e "/onvif/wifi/hi3881.ko" ]; then
-		sleep 1
-		hi3881_status=`cat /proc/mci/mci_info | awk '/MCI1/ {print $2}'`
-		if [ "$hi3881_status" = "pluged_connected" ] 
-		then
-			#根据定制决定是否开启wifi功率增强
-            wifiPowerBoostEnable=`cat /usr/local/etc/Edvr.cfg | grep wifiPowerBoostEnable | awk -F "=" '{print $2}' | awk '{sub("^ *","");sub(" *$","");print $1}'`
-            if [ "$wifiPowerBoostEnable" = "1" ]
-            then
-                cp -vr /onvif/wifi/hisilicon/wifi_cfg_max /tmp/wifi_cfg
-            else
-                cp -vr /onvif/wifi/hisilicon/wifi_cfg_ce /tmp/wifi_cfg
-            fi
-            
-			#设置3881 mac地址
-			/usr/sbin/wifi_detect setMac
-			
-			if [ ! -e "/config/debug3881" ]
-			then
-            	insmod /onvif/wifi/hi3881.ko
-            	touch $WifiModFile
-			fi
-		else	
-			insmod /onvif/wifi/8188fu.ko
-			touch $WifiModFile
-		fi
-	else
-		insmod /onvif/wifi/rtl8189f.ko
-		touch $WifiModFile
-	fi
-	insmod /onvif/moto/moto_drv.ko
-	ifconfig wlan0 up
-	ApMode=`cat /usr/local/etc/config.ini | grep bSupportWlanAP | awk -F "=" '{print $2}'`
-	if [ "1" == "$ApMode" ]; then
-		echo "Current device is support ApMode!"
-        #/onvif/wifi/softAp &
-	fi
-	/usr/sbin/wifi_detect noInsmodWifi
+ln -s /onvif/wifi/wpa_*       /usr/sbin/
+ln -s /onvif/wifi/iw*         /usr/sbin/
+ln -s /onvif/ramdisk/*        /usr/sbin/
+ln -s /onvif/wifi/host*       /usr/sbin/
+
+mkdir -p /tmp/picture/pic_for_email
+mkdir -p /tmp/picture/pic_for_sd
+mkdir -p /tmp/picture/pic_for_ftp
+
+insmod /onvif/phy/sr9900.ko
+ifconfig eth0 up
+
+insmod /onvif/wifi/cfg80211.ko
+#if [ -e "/tmp/.SensorName_F23" ]; then
+if [ -e "/onvif/wifi/8188fu.ko" -o -e "/onvif/wifi/hi3881.ko" ]; then
+    sleep 1
+    hi3881_status=`cat /proc/mci/mci_info | awk '/MCI1/ {print $2}'`
+    if [ "$hi3881_status" = "pluged_connected" ] 
+    then
+        #根据定制决定是否开启wifi功率增强
+        wifiPowerBoostEnable=`cat /usr/local/etc/Edvr.cfg | grep wifiPowerBoostEnable | awk -F "=" '{print $2}' | awk '{sub("^ *","");sub(" *$","");print $1}'`
+        if [ "$wifiPowerBoostEnable" = "1" ]
+        then
+            cp -vr /onvif/wifi/hisilicon/wifi_cfg_max /tmp/wifi_cfg
+        else
+            cp -vr /onvif/wifi/hisilicon/wifi_cfg_ce /tmp/wifi_cfg
+        fi
+        
+        #设置3881 mac地址
+        /usr/sbin/wifi_detect setMac
+        
+        if [ ! -e "/config/debug3881" ]
+        then
+            insmod /onvif/wifi/hi3881.ko
+            touch $WifiModFile
+        fi
+    else	
+        insmod /onvif/wifi/8188fu.ko
+        touch $WifiModFile
+    fi
+else
+    insmod /onvif/wifi/rtl8189f.ko
+    touch $WifiModFile
 fi
+insmod /onvif/moto/moto_drv.ko
+ifconfig wlan0 up
+ApMode=`cat /usr/local/etc/config.ini | grep bSupportWlanAP | awk -F "=" '{print $2}'`
+if [ "1" == "$ApMode" ]; then
+    echo "Current device is support ApMode!"
+    #/onvif/wifi/softAp &
+fi
+/usr/sbin/wifi_detect noInsmodWifi
 
 /usr/sbin/boa -c /home/http -f /etc/conf.d/boa/boa.conf
 
