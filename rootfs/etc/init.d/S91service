@@ -8,7 +8,6 @@ then
     ./initrun.sh
 else
     #Setting parts mounting 
-    mount -t jffs2     /dev/mtdblock4 /web    -o sync
     mount -t squashfs  /dev/mtdblock5 /custom
     mount -t jffs2     /dev/mtdblock6 /config -o sync
 
