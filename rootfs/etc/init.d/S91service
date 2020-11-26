@@ -3,12 +3,10 @@
 check3881Flag=`/usr/sbin/fw_printenv check3881 | awk -F "=" '{print $2}'`
 if [ $check3881Flag -eq 1 ] 
 then
-    mount -t jffs2     /dev/mtdblock7 /onvif  -o sync
     cd /app
     ./initrun.sh
 else
     #Setting parts mounting 
-    mount -t squashfs  /dev/mtdblock5 /custom
     mount -t jffs2     /dev/mtdblock6 /config -o sync
 
     ln -s /web/http/* /home/http/

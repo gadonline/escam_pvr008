@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0">
+  <specVersion>
+    <major>1</major>
+    <minor>0</minor>
+  </specVersion>
+  <actionList>
+    <action>
+      <name>SetIP</name>
+      <argumentList>
+      	<argument>
+			<name>DeviceIP</name>
+			<direction>in</direction>
+			<relatedStateVariable>DeviceIP</relatedStateVariable>
+		</argument>
+		<argument>
+			<name>DeviceNetmask</name>
+			<direction>in</direction>
+			<relatedStateVariable>DeviceIP</relatedStateVariable>
+		</argument>
+		<argument>
+			<name>DeviceGateway</name>
+			<direction>in</direction>
+			<relatedStateVariable>DeviceIP</relatedStateVariable>
+		</argument>
+		<argument>
+			<name>NewDeviceIP</name>
+			<retval />
+        	<relatedStateVariable>NewDeviceIP</relatedStateVariable>
+        	<direction>out</direction>
+        </argument>
+      </argumentList>
+    </action>
+  </actionList>
+  <serviceStateTable>
+    <stateVariable sendEvents="no">
+      <name>DeviceIP</name>
+      <dataType>string</dataType>
+    </stateVariable>  
+    <stateVariable sendEvents="no">
+      <name>DeviceNetmask</name>
+      <dataType>string</dataType>
+    </stateVariable>   
+    <stateVariable sendEvents="no">
+      <name>DeviceGateway</name>
+      <dataType>string</dataType>
+    </stateVariable>   
+    <stateVariable sendEvents="yes">
+      <name>NewDeviceIP</name>
+      <dataType>string</dataType>
+    </stateVariable>
+  </serviceStateTable>
+
+</scpd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

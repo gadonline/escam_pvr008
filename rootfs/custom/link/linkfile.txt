@@ -1,0 +1,8 @@
+[system]
+dvr=idvr9000
+
+[P2P]
+APPDOWNLOAD=http://www.zwcloud.wang/p2p_direct_p6slite.html
+
+[end]
+dvr=idvr9000

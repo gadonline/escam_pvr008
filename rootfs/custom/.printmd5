@@ -1,0 +1,80 @@
+#!/bin/sh
+	echo "++++++++++++++++++++firmware+++++++++++++++++++++++"
+	md5sum /lib/firmware/gk_fw.bin
+	echo "+++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+	echo "++++++++++++++++++++sensors++++++++++++++++++++++++"
+	md5sum /app/etc/sensors/*
+	echo "+++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+	echo "++++++++++++++++++++driver+++++++++++++++++++++++++"
+	md5sum /lib/modules/3.4.43-gk/extra/*
+	echo "+++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+	echo "++++++++++++++++++++sdklib+++++++++++++++++++++++++"
+	md5sum /usr/lib/libadi.so
+	md5sum /usr/lib/libimage.so
+	md5sum /usr/lib/libzwsdk.so
+	echo "+++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+	echo "++++++++++++++++++++netlib+++++++++++++++++++++++++"
+	md5sum /usr/lib/libhyprivate.so
+	md5sum /usr/lib/libhieserver.so
+	md5sum /usr/lib/librtsp.so
+	md5sum /usr/lib/libhyonvif.so
+	md5sum /usr/lib/libonvif.so
+	md5sum /usr/lib/libjstp.so
+	md5sum /usr/lib/libulk_net.so
+	md5sum /usr/lib/libzwp2p.so
+	md5sum /usr/lib/libzwmobile.so
+	md5sum /usr/lib/libtutkmobile.so
+	md5sum /web/http/ClientControl.cab
+	echo "+++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+	echo "+++++++++++++++++++++++midlib++++++++++++++++++++++"
+	md5sum /usr/lib/libadsl.so
+	md5sum /usr/lib/libAVL.so   
+	md5sum /usr/lib/libCOM.so    
+	md5sum /usr/lib/libddt.so
+	md5sum /usr/lib/libDIP.so   
+	md5sum /usr/lib/libDOP.so
+	md5sum /usr/lib/libftp.so
+	md5sum /usr/lib/libhie_dnsupdate.so 
+	md5sum /usr/lib/libhybackup.so
+	md5sum /usr/lib/libip.so 
+	md5sum /usr/lib/libMPU.so
+	md5sum /usr/lib/libmysystem.so
+	md5sum /usr/lib/libNET.so
+	md5sum /usr/lib/libOPL.so
+	md5sum /usr/lib/libPAR.so
+	md5sum /usr/lib/libPTZ.so
+	md5sum /usr/lib/libPUB.so
+	md5sum /usr/lib/libRNL.so
+	md5sum /usr/lib/libsqlite3.so.0.8.6 
+	md5sum /usr/lib/libSYS.so
+	md5sum /usr/lib/libUSR.so
+	md5sum /usr/lib/libwatch.so
+	md5sum /usr/lib/libwifi.so 
+	md5sum /app/root/edvr/IntDll/libPelcoD.so
+	md5sum /app/root/edvr/IntDll/libPelcop.so
+	echo "+++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+	echo "+++++++++++++++++++++++app+++++++++++++++++++++++++"
+	md5sum /app/root/edvr/ambarella_test
+	md5sum /app/root/edvr/myWatchDogProcess
+	md5sum /app/usr/bin/msmtp
+	md5sum /app/usr/bin/mutt
+	md5sum /app/usr/sbin/boa
+	md5sum /app/usr/sbin/ntpdate
+	md5sum /app/usr/sbin/systemd
+	md5sum /app/usr/sbin/wifi_detect
+	md5sum /app/usr/sbin/MonitorProcess
+	echo "+++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+	echo "+++++++++++++++++++++++config++++++++++++++++++++++"
+	md5sum /usr/local/etc/Edvr.default
+	md5sum /usr/local/etc/picdefault.ini
+	md5sum /config/etc/conf.d/boa/boa.conf
+	md5sum /usr/local/etc/Edvr.flag
+	echo "+++++++++++++++++++++++end+++++++++++++++++++++++++"
+
